@@ -11,24 +11,15 @@ This is just a brute force method. There are more efficient approaches.
 '''
 
 def check_around(string, leftindex, rightindex):
-    return_string = ''
-    if rightindex - leftindex == 2:
-        return_string = string[(leftindex+rightindex)//2]
-        # abcba
-        for x in range(min(leftindex +1, len(string) - rightindex)):
-            left_pointer = leftindex - x
-            right_pointer = rightindex + x
-            if left_pointer < 0 or right_pointer >= len(string) or string[left_pointer] != string[right_pointer]:
-                break
-            return_string = string[left_pointer] + return_string + string[right_pointer]
-    else:
-        # abba
-        for x in range(min(leftindex +1, len(string) - rightindex)):
-            left_pointer = leftindex - x
-            right_pointer = rightindex + x
-            if left_pointer < 0 or right_pointer >= len(string) or string[left_pointer] != string[right_pointer]:
-                break
-            return_string = string[left_pointer] + return_string + string[right_pointer]
+    # abccba
+    # abcba
+    return_string = '' if rightindex - leftindex == 1 else string[(leftindex+rightindex)//2]
+    for x in range(min(leftindex +1, len(string) - rightindex)):
+        left_pointer = leftindex - x
+        right_pointer = rightindex + x
+        if left_pointer < 0 or right_pointer >= len(string) or string[left_pointer] != string[right_pointer]:
+            break
+        return_string = string[left_pointer] + return_string + string[right_pointer]
     return return_string
 
 def longest_palindromes(string):
